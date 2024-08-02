@@ -3,31 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project-Rock-Paper-Scissors</title>
+    <title>Project</title>
 </head>
 <body>
     <script>
-        console.log("Hello World")
+        //options//
+        const options = ['rock','paper','scissor'];
+       
+        /* Functions will be Created Here */
 
-        const rock = 0;
-        const paper = 1;
-        const sissor = 2
-        function getComputerChoice(){
-           let computerselection = Math.floor(Math.random() * 3);
-           
+        // Player choice//
+        function getplayerchoice(){
+            let validinput = false;
+            while(validinput == false){
+                const playerchoice = prompt(`Whats Your Choice ?`);
+                if(playerchoice == null){
+                    continue;
+                }
+                const choiceinlower = playerchoice.toLowerCase();
+                if(options.includes(choiceinlower)){
+                    validinput = true;
+                    return choiceinlower;
+                }
+            }
+
         }
-        console.log(getComputerChoice())
-        
+
+        //Computer Selection Function
+        function computerselection(){
+           const choice = options[Math.floor(Math.random()*options.length)];
+            return choice;
+        }
+
+        //Function for Checking winner//
+        function checkwinner(playerchoice,computerchoice){
+            if(playerchoice === computerchoice){
+                return "Tie"
+            }else if((playerchoice === "rock") && (computerchoice === "scissor") ||
+                    ((playerchoice === "paper") && (computerchoice === "rock"))   ||
+                    ((playerchoice === "scissor") && (computerchoice === "paper")))
+                    {
+                        return "Player"
+                    }
+            else{
+                return "Computer"
+            }
+
+        }
+
+        function game(){
+            let playerscore = 0;
+            let computerscore = 0;
+            let tiescore = 0;
+            console.log("welcome\nLets Play 👊✋✌️");
+            for(let i = 1; i <= 5;i++){
+                console.log(`Round ${i}`);
+                //playerchoice = prompt(`Whats Your Choice for Round ${i}?`);
+                //console.log("Player selects:",playerchoice);
+                playerchoice = getplayerchoice();
+                console.log("Player selects:",playerchoice);
+                computerchoice = computerselection();
+                console.log("Computer Selects",computerchoice);
+                /* winner=checkwinner(); */
+                const winneris = checkwinner(playerchoice,computerchoice)
+                console.log("Result :",winneris);
+                if(winneris == "Computer"){
+                    computerscore++;
+                }else if(winneris == "Player"){
+                    playerscore++;
+                }
+                else{
+                    tiescore++;
+                }
+            }
+            console.log(`Final Score for Computer is ${computerscore},and for Player is ${playerscore}`)
+            if(playerscore >computerscore){
+                alert("Player is Winner");
+            }else if(playerscore < computerscore){
+                alert("Computer is Winner");
+            }else if(playerscore = computerscore){
+                alert("Its A Tie");
+            }   
+        }
+
+        //Welcome//
+        alert("Play Rock Paper scissor Game")
+        game();
+
+
+/*         //player choice//
+        playerchoice = prompt("Whats Your Choice?");
+        console.log("Player selects:",playerchoice); */
+
+/*         //computer choice//
+        computerchoice = computerselection();
+        console.log("Computer Selects",computerchoice); */
+
+/*         //Check winner
+        winner=checkwinner();
+        const winneris = checkwinner(playerchoice,computerchoice)
+        console.log("result:",winneris); */
+
+
+
     </script>
     
-
-
-
-
-
-
-
-
 </body>
 </html>
-
